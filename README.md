@@ -47,7 +47,7 @@ The following commands will build and deploy the application using the AWS SAM C
 - AWS Lambda does not set a `HOME` environment variable by default.
 - DuckDB installs extensions inside the HOME directory.
 - Therefore, to ensure successful extension installation, we set `HOME` to `/tmp` within the Lambda function’s environment variables.
-- Otherwise, you'll encounter errors as follows (duckdb/duckdb #3855)[https://github.com/duckdb/duckdb/issues/3855]:
+- Otherwise, you'll encounter errors as follows [duckdb/duckdb #3855](https://github.com/duckdb/duckdb/issues/3855):
     ```
     D INSTALL httpfs;
     IO Error: Can't find the home directory at ''
