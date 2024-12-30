@@ -15,5 +15,6 @@ CREATE SECRET (
 """)
 
 def lambda_handler(event, context):
-    req = con.sql(f"SELECT * FROM read_csv('{S3URI}') LIMIT 3")
-    print(req)
+    res = con.sql(f"SELECT * FROM read_csv('{S3URI}') LIMIT 3")
+    print(res)
+    return str(res)

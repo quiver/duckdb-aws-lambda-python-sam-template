@@ -16,12 +16,12 @@ This repository contains an AWS SAM application that utilizes a Python-based AWS
 
 ## Pre-Deployment Steps
 
-1. **Upload the CSV File**  
+1. **Upload the CSV File**
    Upload your CSV file to an S3 bucket of your choice. For example:
    ```
    s3://YOUR-BUCKET/FILENAME.csv
    ```
-2. **Modify `template.yml`**  
+2. **Modify `template.yml`**
    In the `template.yml` file, locate the parameter `S3URI` and update it to match your bucket and file name. For example:
    ```yaml
    S3URI: s3://YOUR-BUCKET/FILENAME.csv
@@ -31,16 +31,34 @@ This repository contains an AWS SAM application that utilizes a Python-based AWS
 
 The following commands will build and deploy the application using the AWS SAM CLI.
 
-1. **Build the Application**  
+1. **Build the Application**
    ```
    $ sam build
    ```
 
-2. **Deploy the Application**  
+2. **Deploy the Application**
    ```
    $ sam deploy --guided
+
+
    ```
-   Once the deployment is complete, SAM will provide outputs such as the Lambda function name or API endpoints (if any).
+   Once the deployment is complete, SAM will provide outputs such as the Lambda function ARN.
+
+3. **Invoke Lambda Function**
+   ```
+   $ aws lambda invoke \
+    --function-name arn:aws:lambda:ap-northeast-1:123456789012:function:duck-DuckDBLambdaFunction \
+    --payload '{}' \
+    response.json
+   {
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+   }
+
+   $ cat response.json
+
+   ... SQL OUTPUT GOES HERE...
+   ```
 
 ## Important Notes on DuckDB and Lambda
 
