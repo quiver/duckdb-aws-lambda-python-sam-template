@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Sample SAM Template for DuckDB Lambda Python 3.13
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 512
+
+Resources:
+  DuckDBLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Policies:
+        - AmazonS3ReadOnlyAccess
+      Environment:
+        Variables:
+          HOME: /tmp
+          S3URI: s3://YOUR-BUCKET/titanic3.csv
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src
+      DockerTag: python3.13-v1
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  DuckDBLambdaFunction:
+    Description: "Lambda Function ARN"
+    Value: !GetAtt DuckDBLambdaFunction.Arn
+  DuckDBLambdaFunctionIamRole:
+    Description: "Implicit IAM Role created for Lambda Function"
+    Value: !GetAtt DuckDBLambdaFunctionRole.Arn
