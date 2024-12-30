@@ -21,7 +21,7 @@ Resources:
       Environment:
         Variables:
           HOME: /tmp
-          S3URI: s3://YOUR-BUCKET/titanic3.csv
+          S3URI: s3://YOUR-BUCKET/FILENAME.csv
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src
